@@ -12,7 +12,7 @@ pipeline {
   stages {
     stage('Clone Repo') {
       steps {
-        git 'https://github.com/your-username/project-name.git'
+        git url: 'https://github.com/bhavanamatcha/my-new-project'
       }
     }
 
