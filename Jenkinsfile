@@ -1,1 +1,43 @@
-ECHO is on.
+pipeline {
+  agent any
+
+  tools {
+    nodejs 'NodeJS'  // Must match Jenkins tool name
+  }
+
+  environment {
+    IMAGE_NAME = 'my-npm-app'
+  }
+
+  stages {
+    stage('Clone Repo') {
+      steps {
+        git 'https://github.com/your-username/project-name.git'
+      }
+    }
+
+    stage('Install Dependencies') {
+      steps {
+        sh 'npm install'
+      }
+    }
+
+    stage('Lint') {
+      steps {
+        sh 'npm run lint'
+      }
+    }
+
+    stage('Build Docker Image') {
+      steps {
+        sh 'docker build -t $IMAGE_NAME .'
+      }
+    }
+
+    stage('Run Docker Container') {
+      steps {
+        sh 'docker run -d -p 3000:3000 $IMAGE_NAME'
+      }
+    }
+  }
+}
