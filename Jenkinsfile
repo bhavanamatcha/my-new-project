@@ -30,7 +30,7 @@ pipeline {
 
     stage('Run Docker Container') {
       steps {
-        sh 'docker run -d -p 4000:4000 $IMAGE_NAME'
+        sh 'docker run -d -p 4001:4000 $IMAGE_NAME'
       }
     }
   }
